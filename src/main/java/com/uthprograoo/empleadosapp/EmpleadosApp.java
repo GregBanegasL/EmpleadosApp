@@ -4,6 +4,10 @@
 
 package com.uthprograoo.empleadosapp;
 
+import com.uthprograoo.empleadosapp.model.Empleado;
+import com.uthprograoo.empleadosapp.dao.EmpleadosDAO;
+import com.uthprograoo.empleadosapp.util.ConexionSQLite;
+
 /**
  *
  * @author Gregory Banegas
@@ -11,6 +15,27 @@ package com.uthprograoo.empleadosapp;
 public class EmpleadosApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        try{
+            System.out.println("");
+            ConexionSQLite.CrearTablas();
+            Empleado emple = new Empleado();
+            emple.setNombres("Gregory");
+            emple.setApellidos("Banegas");
+            emple.setPuesto("Motorista");
+            emple.setSalario(15000.00);
+
+            EmpleadosDAO dao = new EmpleadosDAO();
+
+            if(dao.GuardarEmpleado(emple)){
+                System.out.println("Empleado ingresado con exito");
+            }
+            else{
+                System.out.println("Ha ocurrido un error");
+            }
+           
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
     }
 }

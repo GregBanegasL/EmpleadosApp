@@ -6,6 +6,7 @@ package com.uthprograoo.empleadosapp.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 /**
  *
@@ -15,7 +16,7 @@ public class ConexionSQLite {
     private static final String urldb =
             "jdbc:sqlite:Empleados.db";
     
-    private static Connection conexion()
+    public static Connection conexion()
     {
         try
         {
@@ -35,6 +36,13 @@ public class ConexionSQLite {
                 +"apellidos TEXT NOT NULL,"
                 +"puesto TEXT NOT NULL,"
                 +"salario REAL NOT NULL)";
+        
+       try(Connection con = conexion(); Statement st = con.createStatement()){
+           st.execute(sql);
+       }
+       catch(Exception ex){
+           ex.printStackTrace();
+       }
     }
     
 }
